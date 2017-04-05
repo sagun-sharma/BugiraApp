@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             groupby = (info.groupByField)!
         
         
-        NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) order by \(groupby)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+        NSWorkspace.shared().open(NSURL(string: "jql= \(search) order by \(groupby)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
     }
     func checkLogin () -> Bool {
         if ((keychain.get("bugirausername") != nil)) && ((keychain.get("bugirapassword") != nil))
