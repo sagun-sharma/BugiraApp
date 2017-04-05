@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LoginViewController" customModule="Bugira" customModuleProvider="target">
             <connections>
+                <outlet property="loadprogress" destination="DOQ-Qr-OqE" id="6ty-5O-wT7"/>
                 <outlet property="loginbutton" destination="CDZ-W5-7TN" id="l7w-Q3-8qu"/>
                 <outlet property="logo" destination="OF7-yu-HXl" id="8WS-Fp-vDu"/>
                 <outlet property="password" destination="Akb-q3-ZRK" id="umb-ev-QNk"/>
@@ -61,8 +62,12 @@
                         <action selector="savelogin:" target="-2" id="LkF-t9-FL5"/>
                     </connections>
                 </button>
+                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="DOQ-Qr-OqE">
+                    <rect key="frame" x="51" y="233" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </progressIndicator>
             </subviews>
-            <point key="canvasLocation" x="1309" y="103"/>
+            <point key="canvasLocation" x="297" y="155"/>
         </customView>
     </objects>
 </document>

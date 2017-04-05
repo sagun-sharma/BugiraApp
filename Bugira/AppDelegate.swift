@@ -10,7 +10,7 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     @IBOutlet weak var window: NSWindow!
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     let popover = NSPopover()
@@ -18,12 +18,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var eventMonitor: EventMonitor?
     let menu = NSMenu()
     let keychain = KeychainSwift()
-    let vc = LoginViewController()
+    let viewcontroller = LoginViewController()
+    let cvc = QueryChange()
+    let info = QueryInfo()
     func applicationDidFinishLaunching(_ aNotification: Notification)  {
-       
+        
         let loginflag = checkLogin()
         if(loginflag==true){
-          vc.loginwithcredentials()
+            viewcontroller.loginwithcredentials()
         }
         
         menu.addItem(NSMenuItem(title: "Login", action: #selector(showPopover), keyEquivalent: "L"))
@@ -45,11 +47,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         eventMonitor?.start()
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-        
-       abort()
+        NSApplication.shared().terminate(nil)
     }
     func togglePopover(sender: AnyObject?){
         if popover.isShown {
@@ -58,36 +59,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             showPopover(sender: sender)
         }
     }
-    func test(sender : AnyObject?)
-    {
-        NSWorkspace.shared().open(NSURL(string: "".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
-    }
-      func test1(sender : AnyObject?)
-    {
-        NSWorkspace.shared().open(NSURL(string: "".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
-    }
-    
-    func test2(sender : AnyObject?)
+    func newshow(sender : AnyObject?)
     {
         
-        NSWorkspace.shared().open(NSURL(string: "".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
-    }
-    func test3(sender : AnyObject?)
-    {
-        if let viewcontroller = ChangeQuery(nibName : "ChangeQuery", bundle : nil  ){
+        if let button = statusItem.button {
             
-            if let button = statusItem.button {
-            pop.contentViewController = viewcontroller
+            pop.contentViewController = QueryChange(nibName : "QueryChange", bundle : nil  )
+            
+            
+            print("hi")
             pop.show(relativeTo: button.bounds,of: button, preferredEdge: NSRectEdge.minY)
-            pop.contentSize = NSSize(width: 380, height: 155)
+            pop.contentSize = NSSize(width: 380, height: 145)
             popover.close()
-                
-            }
-         eventMonitor?.start()
-            
-            
         }
-        
     }
     
     func showPopover(sender: AnyObject?) {
@@ -96,7 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             popover.show(relativeTo: button.bounds,of: button, preferredEdge: NSRectEdge.minY)
             popover.contentSize = NSSize(width: 265, height: 175)
-           
+            
             
         }
         eventMonitor?.start()
@@ -107,14 +91,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor?.stop()
         
     }
-    func closepop(sender: AnyObject?){
-    self.pop.close()
-    }
+    
     func doNothing(sender: AnyObject?){
         
     }
+    func menuClick(sender: AnyObject?){
+        var search = String()
+        var groupby = String()
+        
+            search = (info.jqlRawQuery)!
+            groupby = (info.groupByField)!
+        
+        
+        NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) order by \(groupby)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+    }
     func checkLogin () -> Bool {
-        if ((keychain.get("abcusername") != nil)) && ((keychain.get("abcpassword") != nil))
+        if ((keychain.get("bugirausername") != nil)) && ((keychain.get("bugirapassword") != nil))
         {
             return true
         }

@@ -49,41 +49,6 @@
       "idiom" : "mac",
       "size" : "512x512",
       "scale" : "2x"
-    },
-    {
-      "size" : "16x16",
-      "idiom" : "mac",
-      "filename" : "bugicon.png",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "size" : "32x32",
-      "idiom" : "mac",
-      "filename" : "bugicon-1.png",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "size" : "128x128",
-      "idiom" : "mac",
-      "filename" : "bugicon-2.png",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "size" : "256x256",
-      "idiom" : "mac",
-      "filename" : "bugicon-3.png",
-      "unassigned" : true,
-      "scale" : "2x"
-    },
-    {
-      "size" : "512x512",
-      "idiom" : "mac",
-      "filename" : "bugicon-4.png",
-      "unassigned" : true,
-      "scale" : "2x"
     }
   ],
   "info" : {
