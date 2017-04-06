@@ -19,6 +19,8 @@ class LoginViewController: NSViewController {
     var session:URLSession? = nil
     var firstlogin = true
     var timer:Timer? = Timer()
+    // var queryInfo = QueryInfo()
+    //var queryChange = QueryChange()
     var tempDict = [String : Int]()
     @IBOutlet weak var username: NSTextField!
     @IBOutlet weak var password: NSSecureTextField!
@@ -130,6 +132,8 @@ class LoginViewController: NSViewController {
             jqlRawQuery = (self.appDelegate?.info.jqlRawQuery)!
             groupBy = (self.appDelegate?.info.groupByField)!
         }
+       
+        let newQuery = "=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
         
         let newQuery = "jql=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
         
