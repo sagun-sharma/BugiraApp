@@ -97,10 +97,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         groupby = (info.groupByField)!
         if(groupby == "project"){
             let text = "\"\(queryItem)\""
-            NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) and \(groupby)=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+            NSWorkspace.shared().open(NSURL(string: "jql= \(search) and \(groupby)=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
         }
         else{
-            NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) and \(groupby)=\(queryItem)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+            NSWorkspace.shared().open(NSURL(string: ?jql= \(search) and \(groupby)=\(queryItem)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
         }
     }
     func checkLogin () -> Bool {
