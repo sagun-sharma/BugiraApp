@@ -130,7 +130,7 @@ class LoginViewController: NSViewController {
             jqlRawQuery = (self.appDelegate?.info.jqlRawQuery)!
             groupBy = (self.appDelegate?.info.groupByField)!
         }
-        let newQuery = "https://deepthought.guavus.com:9443/jira/rest/api/2/search?jql=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
+        let newQuery = "jql=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
         
         let rawquery :  String = newQuery.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         
