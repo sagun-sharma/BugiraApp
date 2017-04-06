@@ -13,18 +13,12 @@ class QueryChange: NSViewController {
     var someDict = [String : Int]()
     var session:URLSession? = nil
     let keychain = KeychainSwift()
-    let number = 1
-    var temptimer:Timer? = Timer()
-    
     let info = QueryInfo()
     @IBOutlet weak var searchbar: NSTextField!
     @IBOutlet weak var loadprogress: NSProgressIndicator!
     @IBOutlet weak var orderbycombo: NSComboBox!
     @IBOutlet weak var backbutton: NSButton!
     @IBOutlet weak var enterbutton: NSButton!
-    
-    @IBOutlet var myview: NSView!
-    
     /***********************************************************
      
      ************************************************************/
@@ -41,8 +35,6 @@ class QueryChange: NSViewController {
         
         // Do view setup here.
     }
-    
-    
     @IBAction func enter(_ sender: Any) {
         self.loadprogress.isHidden = false
         self.loadprogress.startAnimation(self)
@@ -58,7 +50,6 @@ class QueryChange: NSViewController {
             newquery()
         }
     }
-    
     
     @IBAction func goback(_ sender: Any) {
         self.appDelegate?.pop.close()

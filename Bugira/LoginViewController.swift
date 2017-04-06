@@ -18,9 +18,7 @@ class LoginViewController: NSViewController {
     var mypass = String()
     var session:URLSession? = nil
     var firstlogin = true
-    var timer:Timer? = Timer()
-    // var queryInfo = QueryInfo()
-    //var queryChange = QueryChange()
+    var queryChange = QueryChange()
     var tempDict = [String : Int]()
     @IBOutlet weak var username: NSTextField!
     @IBOutlet weak var password: NSSecureTextField!
@@ -28,7 +26,7 @@ class LoginViewController: NSViewController {
     @IBOutlet weak var logo: NSImageView!
     
     @IBOutlet weak var loadprogress: NSProgressIndicator!
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         self.loadprogress.isHidden = true
         self.username.placeholderString = "Username"
         self.password.placeholderString = "Password"
@@ -51,9 +49,9 @@ class LoginViewController: NSViewController {
         self.loadprogress.isHidden = false
         self.loadprogress.startAnimation(self)
         login()
-        if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: Double(number*100), target: self, selector: #selector(loginwithcredentials), userInfo: nil, repeats: true)
-        }
+        
+        _ = Timer.scheduledTimer(timeInterval: Double(number*100), target: self, selector: #selector(loginwithcredentials), userInfo: nil, repeats: true)
+        
     }
     
     @IBAction func enterlogin(_ sender: Any) {
@@ -69,7 +67,7 @@ class LoginViewController: NSViewController {
         self.loadprogress.isHidden = false
         self.loadprogress.startAnimation(self)
         login()
-        timer = Timer.scheduledTimer(timeInterval: Double(number*100), target: self, selector: #selector(loginwithcredentials), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: Double(number*100), target: self, selector: #selector(loginwithcredentials), userInfo: nil, repeats: true)
     }
     func login(){
         let config = URLSessionConfiguration.default
@@ -132,10 +130,7 @@ class LoginViewController: NSViewController {
             jqlRawQuery = (self.appDelegate?.info.jqlRawQuery)!
             groupBy = (self.appDelegate?.info.groupByField)!
         }
-       
-        let newQuery = "=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
-        
-        let newQuery = "jql=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
+        let newQuery = "https://deepthought.guavus.com:9443/jira/rest/api/2/search?jql=\(jqlRawQuery)&startAt=0&maxResults=5000&fields=\(groupBy)&validateQuery=true"
         
         let rawquery :  String = newQuery.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         
@@ -219,7 +214,7 @@ class LoginViewController: NSViewController {
                 if(self.tempDict.isEmpty == true){
                     self.appDelegate?.statusItem.title = "0"
                 }
-               
+                
                 let toBeSortedArray = self.tempDict
                 self.appDelegate?.statusItem.menu?.removeAllItems()
                 var totalCount = 0
@@ -228,11 +223,14 @@ class LoginViewController: NSViewController {
                     newmen?.addItem(withTitle: "\(key)  \(value)", action: #selector(self.appDelegate?.menuClick), keyEquivalent: "")
                     totalCount += value
                 }
+                
+                newmen?.addItem(NSMenuItem.separator())
                 newmen?.addItem(NSMenuItem(title: "Change Query ?", action: #selector(self.appDelegate?.newshow), keyEquivalent : ""))
                 
                 self.appDelegate?.statusItem.title = totalCount.description
                 
                 self.loadprogress.stopAnimation(self)
+                
                 self.appDelegate?.pop.close()
                 self.tempDict.removeAll()
                 

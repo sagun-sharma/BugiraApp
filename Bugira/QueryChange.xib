@@ -47,6 +47,9 @@
                             <string>Item 3</string>
                         </objectValues>
                     </comboBoxCell>
+                    <connections>
+                        <action selector="pressenter:" target="-2" id="qXi-n7-HQS"/>
+                    </connections>
                 </comboBox>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JkM-z0-hkV">
                     <rect key="frame" x="112" y="13" width="70" height="32"/>
@@ -93,7 +96,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </progressIndicator>
             </subviews>
-            <point key="canvasLocation" x="-549" y="-187"/>
+            <point key="canvasLocation" x="-946" y="-432"/>
         </customView>
     </objects>
 </document>

@@ -59,19 +59,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             showPopover(sender: sender)
         }
     }
-    func newshow(sender : AnyObject?)
-    {
-        
+    func newshow(sender : AnyObject?) {
+    
         if let button = statusItem.button {
             
             pop.contentViewController = QueryChange(nibName : "QueryChange", bundle : nil  )
-            
-            
             print("hi")
             pop.show(relativeTo: button.bounds,of: button, preferredEdge: NSRectEdge.minY)
-            pop.contentSize = NSSize(width: 380, height: 145)
+            pop.contentSize = NSSize(width: 380, height: 140)
             popover.close()
-        }
+    }
     }
     
     func showPopover(sender: AnyObject?) {
@@ -80,8 +77,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             popover.show(relativeTo: button.bounds,of: button, preferredEdge: NSRectEdge.minY)
             popover.contentSize = NSSize(width: 265, height: 175)
-            
-            
         }
         eventMonitor?.start()
         
@@ -91,13 +86,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventMonitor?.stop()
         
     }
-    
-    func doNothing(sender: AnyObject?){
-        
-    }
     func menuClick(sender: NSMenuItem){
         
         let item = sender.title.components(separatedBy: "  ")
+        
         let queryItem = item[0]
         var search = String()
         var groupby = String()
@@ -105,10 +97,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         groupby = (info.groupByField)!
         if(groupby == "project"){
             let text = "\"\(queryItem)\""
-            NSWorkspace.shared().open(NSURL(string: "jql= \(search) and \(groupby)=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+            NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) and \(groupby)=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
         }
         else{
-        NSWorkspace.shared().open(NSURL(string: "jql= \(search) and \(groupby)=\(queryItem)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+            NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) and \(groupby)=\(queryItem)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
         }
     }
     func checkLogin () -> Bool {
