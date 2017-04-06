@@ -31,6 +31,7 @@ class QueryChange: NSViewController {
     override func viewDidLoad() {
         
         self.loadprogress.isHidden = true
+        
         self.searchbar.placeholderString = "Query"
         
         self.orderbycombo.removeAllItems()
@@ -41,46 +42,33 @@ class QueryChange: NSViewController {
         // Do view setup here.
     }
     
+    
     @IBAction func enter(_ sender: Any) {
-        
         self.loadprogress.isHidden = false
         self.loadprogress.startAnimation(self)
+        let search = searchbar.stringValue
+        let orderby = orderbycombo.stringValue
         
-        let searchquery = searchbar.stringValue
-        
-        if(searchquery.isEmpty){
-            
+        if(search.isEmpty) && (orderby.isEmpty){
+            self.appDelegate?.info.jqlRawQuery  = "assignee=currentuser() and ((type = defect and status != closed) or (type!=defect and resolution is EMPTY))"
+            self.appDelegate?.info.groupByField = "priority"
+            appDelegate?.viewcontroller.loginwithcredentials()
         }
-        newquery()
+        else{
+            newquery()
+        }
     }
     
+    
     @IBAction func goback(_ sender: Any) {
-        
         self.appDelegate?.pop.close()
     }
     
     func newquery(){
-        //let config = URLSessionConfiguration.default
-      self.appDelegate?.info.jqlRawQuery  = searchbar.stringValue
+        
+        self.appDelegate?.info.jqlRawQuery  = searchbar.stringValue
         self.appDelegate?.info.groupByField = orderbycombo.stringValue
         appDelegate?.viewcontroller.loginwithcredentials()
-        
-        /* let  user = keychain.get("bugirausername")
-         let  pass = keychain.get("bugirapassword")
-         
-         let loginString = NSString(format: "%@:%@", user!, pass!)
-         let loginData: NSData = loginString.data(using: String.Encoding.utf8.rawValue)! as NSData
-         let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters)
-         let authString = "Basic \(base64LoginString)"
-         config.httpAdditionalHeaders = ["Authorization" : authString]
-         
-         if(session == nil)
-         {
-         session = URLSession(configuration: config)
-         
-         }
-         appDelegate?.viewcontroller.executeQuery()
-         */
     }
     
 }

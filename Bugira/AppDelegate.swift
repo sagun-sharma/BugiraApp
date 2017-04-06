@@ -95,15 +95,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func doNothing(sender: AnyObject?){
         
     }
-    func menuClick(sender: AnyObject?){
+    func menuClick(sender: NSMenuItem){
+        
+        let item = sender.title.components(separatedBy: "  ")
+        let queryItem = item[0]
         var search = String()
         var groupby = String()
-        
-            search = (info.jqlRawQuery)!
-            groupby = (info.groupByField)!
-        
-        
-        NSWorkspace.shared().open(NSURL(string: "https://deepthought.guavus.com:9443/jira/issues/?jql= \(search) order by \(groupby)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+        search = (info.jqlRawQuery)!
+        groupby = (info.groupByField)!
+        if(groupby == "project"){
+            let text = "\"\(queryItem)\""
+            NSWorkspace.shared().open(NSURL(string: "jql= \(search) and \(groupby)=\(text)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+        }
+        else{
+        NSWorkspace.shared().open(NSURL(string: "jql= \(search) and \(groupby)=\(queryItem)".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)! as URL)
+        }
     }
     func checkLogin () -> Bool {
         if ((keychain.get("bugirausername") != nil)) && ((keychain.get("bugirapassword") != nil))

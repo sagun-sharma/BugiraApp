@@ -9,7 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="QueryChange" customModule="Bugira" customModuleProvider="target">
             <connections>
                 <outlet property="backbutton" destination="JkM-z0-hkV" id="d7C-aH-8Al"/>
-                <outlet property="enter" destination="ETa-Pt-tIv" id="RLa-LW-ueL"/>
+                <outlet property="enter" destination="ETa-Pt-tIv" id="uiX-AP-D5I"/>
                 <outlet property="enterbutton" destination="ETa-Pt-tIv" id="hfO-3a-Bax"/>
                 <outlet property="goback" destination="JkM-z0-hkV" id="a4i-us-AQl"/>
                 <outlet property="loadprogress" destination="gks-iv-0l0" id="8Pi-7o-7b7"/>
@@ -56,7 +56,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="goback:" target="-2" id="hrc-Cp-p8R"/>
+                        <action selector="goback:" target="-2" id="ZUQ-IK-bAS"/>
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PO6-SQ-Koy">
@@ -85,7 +85,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="enter:" target="-2" id="Yun-Dm-TDS"/>
+                        <action selector="enter:" target="-2" id="a71-aQ-ahn"/>
                     </connections>
                 </button>
                 <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="gks-iv-0l0">
